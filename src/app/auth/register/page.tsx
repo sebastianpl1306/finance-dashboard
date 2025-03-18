@@ -1,0 +1,24 @@
+import { FormRegister } from "@/components/auth/FormRegister";
+import Image from "next/image";
+
+export default function RegisterPage() {
+  return (
+    <main className="bg-white w-full md:w-1/3 flex flex-col justify-between">
+      <section className="p-8">
+        <Image src="/images/logo.png" alt="logo" width={100} height={100} />
+      </section>
+      <section className="w-full p-8">
+        <h1 className="font-poppins font-extrabold text-4xl text-center mb-10">Crear cuenta</h1>
+        <FormRegister />
+      </section>
+      <section className="p-8">
+        <p className="font-poppins font-bold">Patrocinadores</p>
+        <div className="flex">
+          {/* <a href="#" className="mx-4">
+            <Image src="/images/sponsor1.png" alt="sponsor1" width={50} height={50} />
+          </a> */}
+        </div>
+      </section>
+    </main>
+  );
+}

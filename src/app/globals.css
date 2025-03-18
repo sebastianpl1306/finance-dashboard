@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #fff;
+  --color-primary: #F05454;
+  --color-primary-100: #ef4444;
+  --color-secondary: #30475E;
+  --color-secondary-100: #30475E;
+  --color-gray: #DDDDDD;
+  --color-black: #222831;
+
+  /* Colores en oscuro */
+  --background-dark: #0e0e0e;
+  --color-primary-dark: #251aa1;
+  --color-secondary-dark: #2e9949;
+  --color-gray-dark: #372c2c;
+  --color-black-dark: #104ca7;
+}
+
+@theme light{
+  /* Colores paleta principal */
+  --color-primary: var(--color-primary);
+  --color-primary-100: var(--color-primary-100);
+  --color-secondary: var(--color-secondary);
+  --color-secondary-100: var(--color-secondary-100);
+  --color-gray: var(--color-gray);
+  --color-black: var(--color-black);
+
+  /* Colores oscuros */
+  --background-dark: var(--background-dark);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-secondary-dark: var(--color-secondary-dark);
+  --color-gray-dark: var(--color-gray-dark);
+  --color-black-dark: var(--color-black-dark);
+
+  /* Fuentes principales */
+  --font-roboto: var(--font-roboto-var);
+  --font-poppins: var(--font-poppins-var);
+}
+
+body {
+  background: var(--background);
+}
