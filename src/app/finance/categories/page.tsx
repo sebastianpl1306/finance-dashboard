@@ -1,15 +1,15 @@
 'use client'
-import { TransactionTable } from "@/components/dashboard";
-import { Breadcrumb, Button, Pagination } from "@/components/UI";
-import { BreadcrumbItem } from "@/interfaces";
 import { useState } from "react";
+import { BreadcrumbItem } from "@/interfaces";
+import { Breadcrumb, Button, Pagination } from "@/components/UI";
+import { CategoriesTable } from "@/components/dashboard";
 
 const itemsBreadCrumb: BreadcrumbItem[] = [
   { name: "Inicio", url: "/finance" },
-  { name: "Movimientos", url: "/finance/transactions" },
+  { name: "Categorías", url: "/finance/categories" },
 ]
 
-export default function TransactionPage() {
+export default function CategoriesPage() {
   const [currentPage, setCurrentPage] = useState(1);
 
   return (
@@ -20,9 +20,9 @@ export default function TransactionPage() {
       </nav>
       <section>
         <div className="flex justify-end mb-4">
-          <Button text="+ Registrar movimiento"/>
+          <Button text="+ Crear categoría"/>
         </div>
-        <TransactionTable/>
+        <CategoriesTable/>
         <Pagination currentPage={currentPage} totalPages={10} changePage={setCurrentPage}/>
       </section>
     </main>
