@@ -2,8 +2,7 @@ import { CategoriesContainerDashboard, LatestTransactionsContainer, MainDashboar
 import { BreadcrumbItem } from "@/interfaces";
 
 const itemsBreadCrumb: BreadcrumbItem[] = [
-  { name: "finance", url: "/" },
-  { name: "Inicio", url: "/" },
+  { name: "Inicio", url: "/finance" },
 ]
 
 export default function HomeDashboardPage() {
