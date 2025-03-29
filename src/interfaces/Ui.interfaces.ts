@@ -1,3 +1,8 @@
+export type Message =
+  | { success: string }
+  | { error: string }
+  | { message: string };
+
 export enum ButtonTypes {
     SUBMIT = 'submit',
     LINK = 'link',

@@ -31,7 +31,7 @@ export const LatestTransactionsContainer = () => {
         <LatestTransactionItem/>
         </section>
         <section className="my-4">
-            <Button text="Ver mas" url="/dashboard/transactions" type={ButtonTypes.LINK} variant={ButtonVariant.LINK}/>
+            <Button text="Ver mas" url="/dashboard/transactions" typeButton={ButtonTypes.LINK} variant={ButtonVariant.LINK}/>
         </section>
     </section>
   )

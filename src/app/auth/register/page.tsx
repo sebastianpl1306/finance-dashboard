@@ -1,7 +1,12 @@
-import { FormRegister } from "@/components/auth/FormRegister";
 import Image from "next/image";
+import { FormRegister } from "@/components/auth/FormRegister";
+import { Message } from "@/interfaces";
 
-export default function RegisterPage() {
+export default async function RegisterPage(props: {
+  searchParams: Promise<Message>;
+}) {
+  const searchParams = await props.searchParams;
+
   return (
     <main className="bg-white w-full md:w-1/3 flex flex-col justify-between">
       <section className="p-8">
@@ -9,7 +14,7 @@ export default function RegisterPage() {
       </section>
       <section className="w-full p-8">
         <h1 className="font-poppins font-extrabold text-4xl text-center mb-10">Crear cuenta</h1>
-        <FormRegister />
+        <FormRegister message={searchParams}/>
       </section>
       <section className="p-8">
         <p className="font-poppins font-bold">Patrocinadores</p>

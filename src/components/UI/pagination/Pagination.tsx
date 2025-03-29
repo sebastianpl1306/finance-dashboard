@@ -1,14 +1,15 @@
 'use client'
 import { useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { IoArrowBackOutline, IoArrowForwardOutline } from "react-icons/io5"
 
 interface Props {
   totalPages: number;
   currentPage: number;
-  changePage: (page: number) => void;
 }
 
-export const Pagination = ({ currentPage, changePage, totalPages }: Props) => {
+export const Pagination = ({ currentPage, totalPages }: Props) => {
+  const router = useRouter();
   const nextNumber = useMemo(() => {
     const number = Math.round((currentPage + 5) / 10) * 10;
     return number === 0 ? 10 : number;
@@ -18,7 +19,7 @@ export const Pagination = ({ currentPage, changePage, totalPages }: Props) => {
 
   const handleChangePage = (nextPage: number) => {
     if(nextPage > totalPages || nextPage <= 0) return;
-    changePage(nextPage);
+    router.push(`?page=${currentPage}`);
   }
 
   return (

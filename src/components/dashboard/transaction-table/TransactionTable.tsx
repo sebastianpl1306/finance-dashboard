@@ -1,37 +1,42 @@
-import { Table, TableBody, TableBodyElement, TableBodyGroupElements, TableHead, TableHeadElement } from "@/components/UI"
 import Link from "next/link"
+import { Table, TableBody, TableBodyElement, TableBodyGroupElements, TableHead, TableHeadElement } from "@/components/UI"
+import { Transaction, TypesTransaction } from "@/interfaces"
 
-export const TransactionTable = () => {
+interface Props {
+    transactions: Transaction[]
+}
+
+export const TransactionTable = ({ transactions }: Props) => {
   return (
     <Table>
         <TableHead>
           <TableHeadElement label='Nombre'/>
           <TableHeadElement label='Fecha'/>
           <TableHeadElement label='Categoría'/>
+          <TableHeadElement label='Tipo de movimiento'/>
           <TableHeadElement label='Total'/>
         </TableHead>
         <TableBody>
-            <TableBodyGroupElements>
-                <TableBodyElement className="flex flex-col">
-                    <Link href={`/finance/transactions/idMovimiento`} className='text-primary'>Patineta scooter</Link>
-                    <span className="text-sm text-gray-400">Patineta scooter de regalo de mi hermana</span>
-                </TableBodyElement>
-                <TableBodyElement>3/02/2025</TableBodyElement>
-                <TableBodyElement>Entretenimiento</TableBodyElement>
-                <TableBodyElement>
-                    <span className="text-red-500">- $87.550</span>
-                </TableBodyElement>
-            </TableBodyGroupElements>
-            <TableBodyGroupElements>
-                <TableBodyElement>
-                    <Link href={`/finance/transactions/idMovimiento`} className='text-primary'>Gym</Link>
-                </TableBodyElement>
-                <TableBodyElement>4/02/2025</TableBodyElement>
-                <TableBodyElement>Entretenimiento</TableBodyElement>
-                <TableBodyElement>
-                    <span className="text-red-500">- $90.000</span>
-                </TableBodyElement>
-            </TableBodyGroupElements>
+            {
+                transactions.map((transaction) => (
+                    <TableBodyGroupElements key={transaction._id}>
+                        <TableBodyElement className="flex flex-col">
+                            <Link href={`/finance/transactions/idMovimiento`} className='text-primary'>{transaction.name}</Link>
+                            <span className="text-sm text-gray-400">{transaction.description}</span>
+                        </TableBodyElement>
+                        <TableBodyElement>{new Date(transaction.date).toLocaleDateString()}</TableBodyElement>
+                        <TableBodyElement>{transaction.category.name}</TableBodyElement>
+                        <TableBodyElement>
+                            {transaction.type === TypesTransaction.EXPENSE && (<span className="text-red-500 font-semibold">EGRESO</span>)}
+                            {transaction.type === TypesTransaction.INCOME && (<span className="text-green-500 font-semibold">INGRESO</span>)}
+                        </TableBodyElement>
+                        <TableBodyElement>
+                            {transaction.type === TypesTransaction.EXPENSE && (<span className="text-red-500 font-semibold">- ${transaction.value}</span>)}
+                            {transaction.type === TypesTransaction.INCOME && (<span className="text-green-500 font-semibold">+ ${transaction.value}</span>)}
+                        </TableBodyElement>
+                    </TableBodyGroupElements>
+                ))
+            }
         </TableBody>
     </Table>
   )

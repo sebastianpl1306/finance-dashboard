@@ -1,20 +1,22 @@
-'use client'
-import { useState } from "react";
-import { Button, InputText } from "@/components/UI";
-import { ButtonTypes, ButtonVariant, TypeVariant } from "@/interfaces";
+import { signInAction } from "@/actions/authActions";
+import { Button, FormMessage, InputText } from "@/components/UI";
+import { ButtonTypes, ButtonVariant, Message, TypeVariant } from "@/interfaces";
 
-export const FormLogin = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+interface Props {
+  message?: Message;
+}
+
+export const FormLogin = ({ message }: Props) => {
 
   return (
     <form action="">
-        <InputText placeholder="Correo electrónico" value={email} onChange={(e) => setEmail(e.target.value)}/>
-        <InputText placeholder="Contraseña" className="my-2" type={TypeVariant.PASSWORD} value={password} onChange={(e) => setPassword(e.target.value)}/>
+        <InputText placeholder="Correo electrónico" name="email"/>
+        <InputText placeholder="Contraseña" className="my-2" type={TypeVariant.PASSWORD} name="password"/>
         <Button text="¿Olvidaste tu contraseña?" variant={ButtonVariant.LINK}/>
+        {message && (<FormMessage message={message}/>)}
         <div className="flex flex-col items-center justify-center mt-10">
-            <Button text="Iniciar Sesión" />
-            <Button text="¿Aun no tienes una cuenta?" url="/auth/register" type={ButtonTypes.LINK} variant={ButtonVariant.LINK} className="mt-4"/>
+            <Button text="Iniciar Sesión" typeButton={ ButtonTypes.SUBMIT } formAction={signInAction}/>
+            <Button text="¿Aun no tienes una cuenta?" url="/auth/register" typeButton={ButtonTypes.LINK} variant={ButtonVariant.LINK} className="mt-4"/>
         </div>
     </form>
   )
