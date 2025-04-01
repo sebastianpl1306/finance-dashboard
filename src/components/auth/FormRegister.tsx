@@ -11,8 +11,8 @@ export const FormRegister = ({ message }: Props) => {
 
   return (
     <form action="">
-        <InputText placeholder="Nombre de usuario" name="name"/>
-        <InputText placeholder="Correo electrónico" name="email"/>
+        <InputText placeholder="Nombre de usuario" className="my-2" name="name"/>
+        <InputText placeholder="Correo electrónico" className="my-2" name="email"/>
         <InputText placeholder="Contraseña" className="my-2" type={TypeVariant.PASSWORD} name="password"/>
         <InputText placeholder="Confirmar Contraseña" className="my-2" type={TypeVariant.PASSWORD} name="check-password"/>
         {message && (<FormMessage message={message}/>)}

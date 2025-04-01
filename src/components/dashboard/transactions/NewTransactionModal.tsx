@@ -8,7 +8,7 @@ import { SelectCategories } from "../categories/SelectCategories"
 import { startCreateTransaction } from "@/actions/transactionsActions"
 
 export const NewTransactionModal = () => {
-    const router = useRouter();
+  const router = useRouter();
   const { isOpenCreateTransactionModal, toggleCreateTransactionModal } = useUIStore( state => state);
   const [errorMessage, setErrorMessage] = useState('');
 

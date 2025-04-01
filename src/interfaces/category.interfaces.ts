@@ -9,6 +9,7 @@ export interface Category {
     name:        string;
     description: string;
     user:        string;
+    color:       string;
     createdAt:   Date;
     updatedAt:   Date;
     __v:         number;
