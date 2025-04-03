@@ -5,6 +5,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement>{
     text: string;
     value: string;
     id: string;
+    checked?: boolean;
   }[];
   className?: string;
   hasError?: boolean;
@@ -23,6 +24,7 @@ export const InputRadio = ({ className, hasError, options, ...props }: Props) =>
                     type='radio'
                     value={option.value}
                     id={option.id}
+                    checked={option.checked}
                     {...props}
                     />
                     <label className='ml-3 text-lg text-black dark:text-white' htmlFor={option.id}>{option.text}</label>

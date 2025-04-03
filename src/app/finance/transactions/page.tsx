@@ -1,5 +1,5 @@
 import { starGetTransactions } from "@/actions/transactionsActions";
-import { ButtonOpenCreateTransactionModal, NewTransactionModal, TransactionTable } from "@/components/dashboard";
+import { ButtonOpenCreateTransactionModal, NewTransactionModal, TransactionTable, UpdateTransactionModal } from "@/components/dashboard";
 import { Breadcrumb, Pagination } from "@/components/UI";
 import { BreadcrumbItem } from "@/interfaces";
 
@@ -31,6 +31,7 @@ export default async function TransactionPage({ params }: Props) {
         <Pagination currentPage={transactions.currentPage} totalPages={transactions.pages}/>
       </section>
       <NewTransactionModal/>
+      <UpdateTransactionModal/>
     </main>
   );
 }

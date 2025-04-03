@@ -77,3 +77,53 @@ export const startCreateTransaction = async(formData: FormData) => {
         return { ok: false, msg: "Ups! Ocurrió un error" }
     }
 }
+
+/**
+ * Permite actualizar las transacciones
+ */
+export const startUpdateTransaction = async(
+    idTransaction: string,
+    categoryId?: string,
+    name?: string,
+    description?: string,
+    type?: string,
+    date?: string,
+    value?: string,
+) => {
+    try {
+        const cookieStore = await cookies()
+        const cookieToken = cookieStore.get('token');
+
+        console.log({ name, date, value, categoryId, type });
+        if (!name || !date || !value || !categoryId || !type) {
+            return {
+                ok: false,
+                msg: 'Llene todos los campos obligatorios'
+            }
+        }
+
+        const { ok, msg } = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transaction/update`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-token': `${cookieToken?.value.replaceAll('"', '')}`
+            },
+            body: JSON.stringify({
+              idTransaction,
+              categoryId,
+              name,
+              description,
+              type,
+              date,
+              value
+            }),
+        }).then( data => data.json() );
+
+        if(!ok) throw new Error(msg);
+
+        return { ok, msg }
+    } catch (error) {
+        console.error('[ERROR][startUpdateTransaction]', { error });
+        return { ok: false, msg: "Ups! Ocurrió un error" }
+    }
+}
