@@ -2,7 +2,7 @@ import { Card } from '@/components/UI'
 
 export const CategoriesContainerDashboard = () => {
   return (
-    <section className="bg-white col-span-5 row-start-6 rounded-lg p-2">
+    <section className="bg-white col-span-5 row-start-5 rounded-lg p-2">
         <article className="px-4 py-2">
         <h3 className="font-bold font-poppins text-lg mb-2">Categorías con mayor movimiento</h3>
         <div className="grid grid-cols-6 gap-4">

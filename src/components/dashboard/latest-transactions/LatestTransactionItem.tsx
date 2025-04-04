@@ -1,15 +1,21 @@
-import React from 'react'
+import { Chip } from "@/components/UI";
+import { Transaction, TypesTransaction } from "@/interfaces";
 
-export const LatestTransactionItem = () => {
+interface Props {
+  transaction: Transaction;
+}
+
+export const LatestTransactionItem = ({ transaction }: Props) => {
   return (
     <article className='my-2'>
         <div className='flex justify-between'>
-            <p>Patineta scooter</p>
-            <p className='font-bold text-red-500'>- $87.550</p>
+            <p>{transaction.name}</p>
+            {transaction.type === TypesTransaction.EXPENSE && (<p className="text-red-500 font-bold">- ${transaction.value.toLocaleString("es-CO")}</p>)}
+            {transaction.type === TypesTransaction.INCOME && (<p className="text-green-500 font-bold">+ ${transaction.value.toLocaleString("es-CO")}</p>)}
         </div>
         <div className='flex justify-between'>
-            <span className='bg-gray rounded-4xl text-sm px-2'>Entretenimiento</span>
-            <p className='text-sm'>3/02/2025</p>
+            <Chip background={transaction.category.color} className="text-sm">{transaction.category.name}</Chip>
+            <p className='text-sm'>{new Date(transaction.date).toLocaleDateString()}</p>
         </div>
     </article>
   )

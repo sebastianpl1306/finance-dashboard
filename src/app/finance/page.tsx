@@ -1,5 +1,7 @@
-import { CategoriesContainerDashboard, LatestTransactionsContainer, MainDashboardStats } from "@/components/dashboard";
+import { starGetTransactions } from "@/actions/transactionsActions";
 import { BreadcrumbItem } from "@/interfaces";
+import { CategoriesContainerDashboard, LatestTransactionsContainer, MainDashboardStats } from "@/components/dashboard";
+import { getGeneralStats } from "@/actions/statsActions";
 
 
 const itemsBreadCrumb: BreadcrumbItem[] = [
@@ -7,10 +9,16 @@ const itemsBreadCrumb: BreadcrumbItem[] = [
 ]
 
 export default async function HomeDashboardPage() {
+  const transactions = await starGetTransactions(1);
+  const generalStats = await getGeneralStats();
+
   return (
-    <main className="grid grid-cols-5 grid-rows-5 gap-4 w-full md:w-5/6 m-auto h-[80vh]">
-        <MainDashboardStats breadCrumbItems={itemsBreadCrumb}/>
-        <LatestTransactionsContainer/>
+    <main className="grid grid-cols-5 grid-rows-5 gap-4 w-full md:w-5/6 m-auto min-h-[80vh]">
+        <MainDashboardStats
+          breadCrumbItems={itemsBreadCrumb}
+          summaryLastMonth={generalStats.summaryLastMonth}
+          summaryLastYear={generalStats.summaryLastYear}/>
+        <LatestTransactionsContainer transactions={transactions.transactions ? transactions.transactions : []}/>
         <CategoriesContainerDashboard/>
     </main>
   );

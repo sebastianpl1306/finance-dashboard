@@ -1,9 +1,52 @@
 'use client'
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { SelectedOptionStats } from "./SelectedOptionStats"
+import { SummaryLast } from "@/interfaces";
 
-export const ContainerMainStats = () => {
+interface Props {
+  summaryLastMonth?: SummaryLast;
+  summaryLastYear?:  SummaryLast;
+}
+
+export const ContainerMainStats = ({ summaryLastMonth, summaryLastYear }: Props) => {
   const [optionSelected, setOptionSelected] = useState('total-money-month');
+  const activeValue = useMemo(() => {
+    switch (optionSelected) {
+      case 'total-money-month':
+        return summaryLastMonth?.total || 0;
+      case 'money-spent-month':
+        return summaryLastMonth?.spent || 0;
+      case 'money-obtained-month':
+        return summaryLastMonth?.obtained || 0;
+      case 'total-money-year':
+        return summaryLastYear?.total || 0;
+      case 'money-spent-year':
+        return summaryLastYear?.spent || 0;
+      case 'money-obtained-year':
+        return summaryLastYear?.obtained || 0;
+      default:
+        return 0;
+    }
+  }, [optionSelected, summaryLastMonth, summaryLastYear])
+
+  const activeText = useMemo(() => {
+    switch (optionSelected) {
+      case 'total-money-month':
+        return 'Total dinero del mes';
+      case 'money-spent-month':
+        return 'Dinero gastado del mes';
+      case 'money-obtained-month':
+        return 'Dinero obtenido del mes';
+      case 'total-money-year':
+        return 'Total dinero del año';
+      case 'money-spent-year':
+        return 'Dinero gastado del año';
+      case 'money-obtained-year':
+        return 'Dinero obtenido del año';
+      default:
+        return '';
+    }
+  }, [optionSelected])
 
   return (
     <section className="flex gap-4">
@@ -18,8 +61,8 @@ export const ContainerMainStats = () => {
             <SelectedOptionStats isActive={optionSelected === "money-obtained-year"} name="money-obtained-year" text="Dinero obtenido" onClick={setOptionSelected}/>
         </article>
         <article className="w-3/5 border rounded-lg border-gray flex flex-col justify-between items-center p-4">
-            <p className="text-2xl font-bold">Total dinero febrero 2025</p>
-            <p className="text-8xl font-extrabold">$ 2.732.535</p>
+            <p className="text-2xl font-bold">{activeText}</p>
+            <p className="text-7xl font-extrabold">$ {activeValue.toLocaleString("es-CO")}</p>
             <span></span>
         </article>
     </section>
