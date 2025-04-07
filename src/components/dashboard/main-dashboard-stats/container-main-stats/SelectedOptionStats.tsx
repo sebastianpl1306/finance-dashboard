@@ -9,7 +9,7 @@ interface Props {
 
 export const SelectedOptionStats = ({ isActive, name, text, onClick }: Props) => {
   return (
-    <button className={`${isActive ? 'border-primary' : 'border-gray'} border w-full h-10 flex items-center rounded-lg p-4 my-2 cursor-pointer`} onClick={() => onClick(name)}>
+    <button className={`${isActive ? 'border-primary' : 'border-gray'} border w-full h-auto flex items-center rounded-lg p-4 my-2 cursor-pointer`} onClick={() => onClick(name)}>
         <div className="mr-4">
             <input
                 type="checkbox"

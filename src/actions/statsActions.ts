@@ -1,5 +1,5 @@
 "use server"
-import { ResponseGetGeneralStats } from "@/interfaces";
+import { ResponseGetCategoryStats, ResponseGetGeneralStats } from "@/interfaces";
 import { cookies } from "next/headers";
 
 export const getGeneralStats = async () => {
@@ -31,5 +31,29 @@ export const getGeneralStats = async () => {
                 spent: 0
             }
         }
+    }
+}
+
+/**
+ * Permite obtener las estadísticas de las categorías
+ */
+export const getCategoryStats = async () => {
+    try {
+        const cookieStore = await cookies()
+        const cookieToken = cookieStore.get('token');
+
+        const { ok, msg, categoriesValues }: ResponseGetCategoryStats = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stats/getCategoryStats`, {
+            method: 'GET',
+            headers: {
+                'x-token': `${cookieToken?.value.replaceAll('"', '')}`
+            }
+        }).then( data => data.json() );
+
+        if(!ok || !categoriesValues) throw new Error(msg);
+
+        return categoriesValues;
+    } catch (error) {
+        console.error('[ERROR][getGeneralStats]', { error });
+        return []
     }
 }

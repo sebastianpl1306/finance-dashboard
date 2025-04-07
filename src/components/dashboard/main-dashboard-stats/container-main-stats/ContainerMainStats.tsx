@@ -49,21 +49,41 @@ export const ContainerMainStats = ({ summaryLastMonth, summaryLastYear }: Props)
   }, [optionSelected])
 
   return (
-    <section className="flex gap-4">
-        <article className="w-2/5">
-            <h3 className="font-bold font-poppins text-lg mb-2">Ultimo mes</h3>
+    <section className="flex flex-col md:flex-row gap-4">
+        {/* Menú Movil ultimo mes */}
+        <article className="w-full block md:hidden">
+          <h3 className="font-bold font-poppins text-lg mb-2">Ultimo mes</h3>
+          <div className="flex gap-2">
             <SelectedOptionStats isActive={optionSelected === "total-money-month"} name="total-money-month" text="Total dinero" onClick={setOptionSelected}/>
             <SelectedOptionStats isActive={optionSelected === "money-spent-month"} name="money-spent-month" text="Dinero gastado" onClick={setOptionSelected}/>
             <SelectedOptionStats isActive={optionSelected === "money-obtained-month"} name="money-obtained-month" text="Dinero obtenido" onClick={setOptionSelected}/>
-            <h3 className="font-bold font-poppins text-lg mb-2">Ultimo año</h3>
-            <SelectedOptionStats isActive={optionSelected === "total-money-year"} name="total-money-year" text="Total dinero" onClick={setOptionSelected}/>
-            <SelectedOptionStats isActive={optionSelected === "money-spent-year"} name="money-spent-year" text="Dinero gastado" onClick={setOptionSelected}/>
-            <SelectedOptionStats isActive={optionSelected === "money-obtained-year"} name="money-obtained-year" text="Dinero obtenido" onClick={setOptionSelected}/>
+          </div>
         </article>
-        <article className="w-3/5 border rounded-lg border-gray flex flex-col justify-between items-center p-4">
+        {/* Menu escritorio */}
+        <article className="w-2/5 hidden md:block">
+          <h3 className="font-bold font-poppins text-lg mb-2">Ultimo mes</h3>
+          <SelectedOptionStats isActive={optionSelected === "total-money-month"} name="total-money-month" text="Total dinero" onClick={setOptionSelected}/>
+          <SelectedOptionStats isActive={optionSelected === "money-spent-month"} name="money-spent-month" text="Dinero gastado" onClick={setOptionSelected}/>
+          <SelectedOptionStats isActive={optionSelected === "money-obtained-month"} name="money-obtained-month" text="Dinero obtenido" onClick={setOptionSelected}/>
+          <h3 className="font-bold font-poppins text-lg mb-2">Ultimo año</h3>
+          <SelectedOptionStats isActive={optionSelected === "total-money-year"} name="total-money-year" text="Total dinero" onClick={setOptionSelected}/>
+          <SelectedOptionStats isActive={optionSelected === "money-spent-year"} name="money-spent-year" text="Dinero gastado" onClick={setOptionSelected}/>
+          <SelectedOptionStats isActive={optionSelected === "money-obtained-year"} name="money-obtained-year" text="Dinero obtenido" onClick={setOptionSelected}/>
+        </article>
+        {/* Contenido */}
+        <article className="w-full md:w-3/5 border rounded-lg border-gray flex flex-col justify-between items-center p-4">
             <p className="text-2xl font-bold">{activeText}</p>
-            <p className="text-7xl font-extrabold">$ {activeValue.toLocaleString("es-CO")}</p>
+            <p className="text-5xl md:text-6xl lg:text-7xl font-extrabold">$ {activeValue.toLocaleString("es-CO")}</p>
             <span></span>
+        </article>
+        {/* Menú Movil ultimo año */}
+        <article className="w-full block md:hidden">
+          <h3 className="font-bold font-poppins text-lg mb-2">Ultimo año</h3>
+          <div className="flex gap-2">
+          <SelectedOptionStats isActive={optionSelected === "total-money-year"} name="total-money-year" text="Total dinero" onClick={setOptionSelected}/>
+          <SelectedOptionStats isActive={optionSelected === "money-spent-year"} name="money-spent-year" text="Dinero gastado" onClick={setOptionSelected}/>
+          <SelectedOptionStats isActive={optionSelected === "money-obtained-year"} name="money-obtained-year" text="Dinero obtenido" onClick={setOptionSelected}/>
+          </div>
         </article>
     </section>
   )
