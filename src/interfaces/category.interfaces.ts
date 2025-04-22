@@ -1,3 +1,5 @@
+import { TypesTransaction } from "./transactions.interfaces";
+
 export interface ResponseGetCategory {
     ok:         boolean;
     msg?:       string;
@@ -10,6 +12,7 @@ export interface Category {
     description: string;
     user:        string;
     color:       string;
+    type:        TypesTransaction;
     createdAt:   Date;
     updatedAt:   Date;
     __v:         number;

@@ -32,3 +32,19 @@ export enum TypesTransaction {
     INCOME = 'income',
     EXPENSE = 'expense'
 }
+
+export interface ResponseGetTransactionsDates {
+    ok:    boolean;
+    msg?:  string;
+    dates: DateElement[];
+}
+
+export interface DateElement {
+    _id:   ID;
+    count: number;
+}
+
+export interface ID {
+    year:  number;
+    month: number;
+}

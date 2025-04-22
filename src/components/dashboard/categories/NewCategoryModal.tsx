@@ -5,6 +5,7 @@ import { useUIStore } from "@/store";
 import { startCreateCategory } from "@/actions/categoryActions";
 import { Button, InputText, Modal } from "@/components/UI";
 import { ButtonTypes } from "@/interfaces";
+import { SelectTypeCategory } from "./SelectTypeCategory";
 
 export const NewCategoryModal = () => {
   const router = useRouter();
@@ -33,6 +34,10 @@ export const NewCategoryModal = () => {
             <span className="mb-4 block">
                 <label className="font-semibold" htmlFor="categoryDescription">Descripción de la categoría (opcional)</label>
                 <InputText placeholder="Ingrese una descripción la categoría" name="categoryDescription" id="categoryDescription"/>
+            </span>
+            <span className="mb-4 block">
+                <label className="font-semibold" htmlFor="categoryDescription">Tipo</label>
+                <SelectTypeCategory name="categoryType" id="categoryType"/>
             </span>
             <span className="mb-4 block">
                 <label className="font-semibold" htmlFor="categoryColor">Color de la categoría</label>

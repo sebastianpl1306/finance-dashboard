@@ -9,8 +9,8 @@ interface Props {
 
 export const SelectedOptionStats = ({ isActive, name, text, onClick }: Props) => {
   return (
-    <button className={`${isActive ? 'border-primary' : 'border-gray'} border w-full h-auto flex items-center rounded-lg p-4 my-2 cursor-pointer`} onClick={() => onClick(name)}>
-        <div className="mr-4">
+    <button className={`${isActive ? 'border-primary' : 'border-gray'} border w-full h-auto flex items-center rounded-lg p-2 md:p-4 my-2 cursor-pointer`} onClick={() => onClick(name)}>
+        <div className="mr-2 md:mr-4">
             <input
                 type="checkbox"
                 className="peer hidden"
@@ -20,11 +20,11 @@ export const SelectedOptionStats = ({ isActive, name, text, onClick }: Props) =>
             />
             <label
                 htmlFor={name}
-                className="block w-6 h-6 border border-gray-400 rounded-full cursor-pointer peer-checked:bg-primary peer-checked:border-transparent transition-all"
+                className="block w-3 h-3 md:w-6 md:h-6 border border-gray-400 rounded-full cursor-pointer peer-checked:bg-primary peer-checked:border-transparent transition-all"
             />
         </div>
         <div className="flex justify-between items-center">
-            <p className={`${isActive ? 'text-primary' : 'text-black'} text-2xl font-semibold`}>{text}</p>
+            <p className={`${isActive ? 'text-primary' : 'text-black'} text-base md:text-2xl font-semibold`}>{text}</p>
         </div>
     </button>
   )

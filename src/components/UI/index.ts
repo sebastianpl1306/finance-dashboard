@@ -3,6 +3,7 @@ export * from './inputs';
 export * from './tables';
 export * from './pagination';
 export * from './form-utils';
+export * from './animate-text';
 
 //Componentes
 export * from './cards/Card';

@@ -5,6 +5,7 @@ import { useCategoryStore } from "@/store";
 import { startUpdateCategory } from "@/actions/categoryActions";
 import { Button, InputText, Modal } from "@/components/UI";
 import { ButtonTypes } from "@/interfaces";
+import { SelectTypeCategory } from "./SelectTypeCategory";
 
 export const UpdateCategoryModal = () => {
   const router = useRouter();
@@ -12,19 +13,22 @@ export const UpdateCategoryModal = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [color, setColor] = useState('');
+  const [type, setType] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (currentCategory) {
         setName(currentCategory.name);
         setDescription(currentCategory.description);
-        setColor(currentCategory.color)
+        setColor(currentCategory.color);
+        setType(currentCategory.type);
     }
 
     return () => {
         setName('')
         setDescription('')
         setColor('')
+        setType('')
     }
   }, [currentCategory])
 
@@ -35,7 +39,7 @@ export const UpdateCategoryModal = () => {
         return;
       }
 
-      const { ok, msg } = await startUpdateCategory(currentCategory?._id, name, description, color);
+      const { ok, msg } = await startUpdateCategory(currentCategory?._id, name, description, color, type);
   
       if(!ok){
         setErrorMessage(msg);
@@ -67,6 +71,10 @@ export const UpdateCategoryModal = () => {
                     id="categoryDescription"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}/>
+            </span>
+            <span className="mb-4 block">
+                <label className="font-semibold" htmlFor="categoryDescription">Descripción de la categoría (opcional)</label>
+                <SelectTypeCategory id="categoryType" name="categoryType" value={type} onChange={(e) => setType(e.target.value)}/>
             </span>
             <span className="mb-4 block">
                 <label className="font-semibold" htmlFor="categoryColor">Color de la categoría</label>

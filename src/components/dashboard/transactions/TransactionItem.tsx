@@ -1,15 +1,24 @@
-import { Chip } from "@/components/UI";
-import { Transaction, TypesTransaction } from "@/interfaces";
+'use client'
+import { Chip } from '@/components/UI'
+import { Transaction, TypesTransaction } from '@/interfaces';
+import { useTransactionStore } from '@/store';
 
 interface Props {
   transaction: Transaction;
 }
 
-export const LatestTransactionItem = ({ transaction }: Props) => {
+export const TransactionItem = ({ transaction }: Props) => {
+  const { setCurrentTransaction, toggleUpdateTransactionModal } = useTransactionStore( state => state);
+
+  const handleSelectTransaction = (transaction: Transaction) => {
+    setCurrentTransaction(transaction);
+    toggleUpdateTransactionModal(true);
+  }
+
   return (
-    <article className='my-2'>
+    <article className='my-2 cursor-pointer' onClick={() => handleSelectTransaction(transaction)}>
         <div className='flex justify-between'>
-            <p>{transaction.name}</p>
+            <p className='font-semibold text-lg'>{transaction.name}</p>
             {transaction.type === TypesTransaction.EXPENSE && (<p className="text-red-500 font-bold">-$ {transaction.value.toLocaleString("es-CO")}</p>)}
             {transaction.type === TypesTransaction.INCOME && (<p className="text-green-500 font-bold">+$ {transaction.value.toLocaleString("es-CO")}</p>)}
         </div>

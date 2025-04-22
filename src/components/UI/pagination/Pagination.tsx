@@ -1,7 +1,8 @@
 'use client'
 import { useMemo } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { IoArrowBackOutline, IoArrowForwardOutline } from "react-icons/io5"
+import { transformParamsTransactions } from "@/helpers";
 
 interface Props {
   totalPages: number;
@@ -9,7 +10,9 @@ interface Props {
 }
 
 export const Pagination = ({ currentPage, totalPages }: Props) => {
+  const pathname = usePathname()
   const router = useRouter();
+  const searchParams = useSearchParams()
   const nextNumber = useMemo(() => {
     const number = Math.round((currentPage + 5) / 10) * 10;
     return number === 0 ? 10 : number;
@@ -19,7 +22,8 @@ export const Pagination = ({ currentPage, totalPages }: Props) => {
 
   const handleChangePage = (nextPage: number) => {
     if(nextPage > totalPages || nextPage <= 0) return;
-    router.push(`?page=${currentPage}`);
+    router.push(`${pathname}${transformParamsTransactions(nextPage.toString(), searchParams.get('month'), searchParams.get('year'))}`);
+    router.refresh();
   }
 
   return (

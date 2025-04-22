@@ -7,10 +7,10 @@ interface Props {
 
 export const CategoriesContainerDashboard = ({ categories }: Props) => {
   return (
-    <section className="bg-white col-span-5 row-start-5 rounded-lg p-2">
+    <section className="bg-white w-full my-10 rounded-lg p-2">
         <article className="px-4 py-2">
         <h3 className="font-bold font-poppins text-lg mb-2">Categorías con mayor movimiento</h3>
-        <div className="grid grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
           {
             categories.map( (category, index) => (
               <Card key={index} className="py-4">

@@ -38,8 +38,9 @@ export const startCreateCategory = async(formData: FormData) => {
         const name = formData.get("categoryName")?.toString();
         const description = formData.get("categoryDescription")?.toString();
         const color = formData.get("categoryColor")?.toString();
+        const type = formData.get("categoryType")?.toString();
 
-        if (!name || !color) {
+        if (!name || !color || !type) {
             return {
                 ok: false,
                 msg: 'Llene todos los campos obligatorios'
@@ -55,7 +56,8 @@ export const startCreateCategory = async(formData: FormData) => {
             body: JSON.stringify({
               name,
               description,
-              color
+              color,
+              type
             }),
         }).then( data => data.json() );
 
@@ -71,12 +73,12 @@ export const startCreateCategory = async(formData: FormData) => {
 /**
  * Permite actualizar categorías
  */
-export const startUpdateCategory = async(idCategory: string, name?: string, description?: string, color?: string) => {
+export const startUpdateCategory = async(idCategory: string, name?: string, description?: string, color?: string, type?: string) => {
     try {
         const cookieStore = await cookies()
         const cookieToken = cookieStore.get('token');
 
-        if (!name || !color) {
+        if (!name || !color || !type) {
             return {
                 ok: false,
                 msg: 'Llene todos los campos obligatorios'
@@ -93,7 +95,8 @@ export const startUpdateCategory = async(idCategory: string, name?: string, desc
               idCategory,
               name,
               description,
-              color
+              color,
+              type
             }),
         }).then( data => data.json() );
 

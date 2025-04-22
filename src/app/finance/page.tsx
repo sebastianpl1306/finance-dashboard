@@ -14,13 +14,15 @@ export default async function HomeDashboardPage() {
   const categoriesStats = await getCategoryStats();
 
   return (
-    <main className="grid grid-cols-5 grid-rows-5 gap-4 w-full md:w-5/6 m-auto min-h-[80vh]">
+    <main className="w-full md:w-5/6 m-auto">
+      <div className="grid grid-cols-5 grid-rows-4 gap-4 h-auto xl:h-[80vh]">
         <MainDashboardStats
           breadCrumbItems={itemsBreadCrumb}
           summaryLastMonth={generalStats.summaryLastMonth}
           summaryLastYear={generalStats.summaryLastYear}/>
         <LatestTransactionsContainer transactions={transactions.transactions ? transactions.transactions : []}/>
-        <CategoriesContainerDashboard categories={categoriesStats ? categoriesStats : []}/>
+      </div>
+      <CategoriesContainerDashboard categories={categoriesStats ? categoriesStats : []}/>
     </main>
   );
 }

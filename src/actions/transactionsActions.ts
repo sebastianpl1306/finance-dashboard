@@ -1,25 +1,38 @@
 "use server"
 import { cookies } from "next/headers";
-import { ResponseCreateTransaction, ResponseGetTransactions } from "@/interfaces";
+import { ResponseCreateTransaction, ResponseGetTransactions, ResponseGetTransactionsDates } from "@/interfaces";
 
 /**
  * Permite obtener las transacciones
  * @returns 
  */
-export const starGetTransactions = async(currentPage: number) => {
+export const starGetTransactions = async(currentPage: number, month?: number, year?: number) => {
     try {
         const cookieStore = await cookies()
         const cookieToken = cookieStore.get('token');
+        let startDate;
+        let finishDate;
+
+        if(month && year) {
+            startDate = new Date(year, month - 1, 1);
+            finishDate = new Date(year, month, 1);
+        }
 
         if(isNaN(currentPage)){
             return { transactions: [], pages: 0, currentPage: 1}
         }
 
-        const { ok, msg, page, totalPages, transactions }: ResponseGetTransactions = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transaction`, {
-            method: 'GET',
+        const { ok, msg, page, totalPages, transactions }: ResponseGetTransactions = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transaction?page=${currentPage}`, {
+            cache: 'no-store',
+            method: 'POST',
             headers: {
+                'Content-Type': 'application/json',
                 'x-token': `${cookieToken?.value.replaceAll('"', '')}`
-            }
+            },
+            body: JSON.stringify({
+                startDate: startDate,
+                finishDate: finishDate
+            })
         }).then( data => data.json() );
 
         if(!ok) throw new Error(msg);
@@ -94,7 +107,6 @@ export const startUpdateTransaction = async(
         const cookieStore = await cookies()
         const cookieToken = cookieStore.get('token');
 
-        console.log({ name, date, value, categoryId, type });
         if (!name || !date || !value || !categoryId || !type) {
             return {
                 ok: false,
@@ -125,5 +137,31 @@ export const startUpdateTransaction = async(
     } catch (error) {
         console.error('[ERROR][startUpdateTransaction]', { error });
         return { ok: false, msg: "Ups! Ocurrió un error" }
+    }
+}
+
+/**
+ * Permite obtener las fechas de las transacciones
+ * @returns Meses y años en los que se han realizado transacciones
+ */
+export const getTransactionsDates = async() => {
+    try {
+        const cookieStore = await cookies()
+        const cookieToken = cookieStore.get('token');
+
+        const { ok, msg, dates }: ResponseGetTransactionsDates = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transaction/get-dates`, {
+            method: 'GET',
+            headers: {
+              'x-token': `${cookieToken?.value.replaceAll('"', '')}`
+            }
+        }).then( data => data.json() );
+
+        if(!ok) throw new Error(msg);
+
+        return { ok, msg, dates }
+    } catch (error) {
+        console.error('[ERROR][getTransactionsDates]', { error });
+        return { ok: false, msg: "Ups! Ocurrió un error" }
+        
     }
 }

@@ -11,7 +11,7 @@ interface Props {
 
 export const MainDashboardStats = ({ breadCrumbItems, summaryLastMonth, summaryLastYear }: Props) => {
   return (
-    <section className="bg-white col-span-5 row-span-2 xl:col-span-3 xl:row-span-4 rounded-lg py-4 px-8">
+    <section className="bg-white col-span-5 row-span-4 xl:col-span-3 rounded-lg py-4 px-8">
         <nav className="mb-2">
             <h2 className="text-2xl font-bold">Inicio</h2>
             <Breadcrumb items={breadCrumbItems}/>

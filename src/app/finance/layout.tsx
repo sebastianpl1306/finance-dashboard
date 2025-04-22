@@ -23,7 +23,6 @@ export default async function DashboardLayout({ children }: Props) {
         <Button text='Inicio' url='/finance' variant={ButtonVariant.LINK} typeButton={ButtonTypes.LINK} className='mx-4'/>
         <Button text='Movimientos' url='/finance/transactions' variant={ButtonVariant.LINK} typeButton={ButtonTypes.LINK} className='mx-4'/>
         <Button text='Categorías' url='/finance/categories' variant={ButtonVariant.LINK} typeButton={ButtonTypes.LINK} className='mx-4'/>
-        <Button text='Total del año' url='/finance/year' variant={ButtonVariant.LINK} typeButton={ButtonTypes.LINK} className='mx-4'/>
       </nav>
       {children}
     </>

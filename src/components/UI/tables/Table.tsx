@@ -7,7 +7,7 @@ interface Props {
 export const Table = ({ children }: Props) => {
   return (
     <table className='w-full'>
-        { children }
+      { children }
     </table>
   )
 }

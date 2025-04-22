@@ -76,7 +76,7 @@ export const signInAction = async (formData: FormData) => {
   }).then( data => data.json() );
 
   if(!data.ok) {
-    return encodedRedirect("error", "/auth/register", data.message);
+    return encodedRedirect("error", "/auth/login", 'Ocurro un error al iniciar sesión, verifica tu correo y contraseña.');
   }
 
   cookieStore.set('token', data.token);
