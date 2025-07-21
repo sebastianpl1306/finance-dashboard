@@ -1,13 +1,22 @@
 import Link from "next/link";
 import { BreadcrumbItem } from "../../../interfaces";
+import { Poppins } from "next/font/google";
 
 interface Props {
+  title: string;
   items: BreadcrumbItem[];
   lastItem?: BreadcrumbItem;
 }
 
-export const Breadcrumb = ({ items, lastItem }: Props) => {
+const poppins = Poppins({
+  variable: "--font-poppins-var",
+  weight: "200"
+});
+
+export const Breadcrumb = ({ title, items, lastItem }: Props) => {
     return (
+      <nav className="mb-2">
+        <h2 className={`${poppins.className} text-2xl font-bold`}>{title}</h2>
         <nav className="flex items-center">
           {items.map(({ name, url }, i) => (
             <span key={name} className="flex items-center">
@@ -35,5 +44,6 @@ export const Breadcrumb = ({ items, lastItem }: Props) => {
             </span>
           )}
         </nav>
+      </nav>
     );
 }

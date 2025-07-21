@@ -4,3 +4,4 @@ export * from './TextArea';
 export * from './InputCheck';
 export * from './Select';
 export * from './Switch';
+export * from './ChangeTheme';

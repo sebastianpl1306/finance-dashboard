@@ -8,7 +8,7 @@ interface Props {
 
 export const TableBodyGroupElements = ({ children, className, onClick }: Props) => {
   return (
-    <tr className={`hover:bg-gray-100 ${className}`} onClick={onClick}>
+    <tr className={`hover:bg-gray-100 hover:dark:bg-background-dark ${className}`} onClick={onClick}>
       { children }
     </tr>
   )

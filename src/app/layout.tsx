@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins, Roboto } from "next/font/google";
 import "./globals.css";
+import { ClientLayout } from "@/components/layout";
 
 const roboto = Roboto({
   variable: "--font-roboto-var",
@@ -25,11 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="light" className="light">
+    <html lang="es">
       <body
-        className={`${roboto.variable} ${poppins.variable} antialiased font-roboto`}
+        className={`${roboto.variable} ${poppins.variable} antialiased font-roboto bg-background-light dark:bg-background-dark`}
       >
-        {children}
+        <ClientLayout>
+          {children}
+        </ClientLayout>
       </body>
     </html>
   );

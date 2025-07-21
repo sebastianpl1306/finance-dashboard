@@ -23,7 +23,7 @@ export const InputCheck = ({ className, onChange, value = false, text, name }: P
             onChange={handleChange}
             checked={value}
         />
-        <label className='ml-3 text-lg text-black dark:text-white' htmlFor={name}>{text}</label>
+        <label className='ml-3 text-lg text-black dark:text-white-dark' htmlFor={name}>{text}</label>
     </div>
   )
 }

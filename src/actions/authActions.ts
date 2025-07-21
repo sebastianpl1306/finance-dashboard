@@ -1,5 +1,6 @@
 "use server";
 
+import { ResponseGetCurrentUser } from "@/interfaces";
 import { encodedRedirect } from "@/utils/utils";
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -79,8 +80,14 @@ export const signInAction = async (formData: FormData) => {
     return encodedRedirect("error", "/auth/login", 'Ocurro un error al iniciar sesión, verifica tu correo y contraseña.');
   }
 
-  cookieStore.set('token', data.token);
+  cookieStore.set('token', data.token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    maxAge: 60 * 60 * 24 * 7,
+    path: '/'
+  });
   cookieStore.set('userId', data.uid);
+  cookieStore.set('userName', data.name);
 
   return redirect("/finance");
 };
@@ -91,3 +98,28 @@ export const signOutAction = async () => {
   cookieStore.delete('userId');
   return redirect("/auth/login");
 };
+
+export const getCurrentUser = async() =>{
+  const cookieStore = await cookies();
+  const cookieToken = cookieStore.get('token');
+
+  if (!cookieToken) return null;
+
+  try {
+    const { ok, user }: ResponseGetCurrentUser = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/userInfo`, {
+      headers: {
+        'x-token': `${cookieToken?.value.replaceAll('"', '')}`
+      },
+      cache: 'no-store'
+    }).then( data => data.json() );;
+
+    if (!ok) {
+      return null;
+    }
+
+    return user;
+  } catch (error) {
+    console.error('Error al obtener el usuario:', error);
+    return null;
+  }
+}

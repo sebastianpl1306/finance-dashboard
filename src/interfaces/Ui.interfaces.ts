@@ -22,7 +22,12 @@ export enum TypeVariant {
     URL = 'url',
     TIME = 'time',
 }
-  
+
+export enum ThemeEnum {
+    THEME_DARK = 'dark',
+    THEME_LIGHT = 'light',
+}
+
 export interface BreadcrumbItem {
     name: string;
     url: string;

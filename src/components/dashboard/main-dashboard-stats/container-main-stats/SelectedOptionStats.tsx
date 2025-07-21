@@ -24,7 +24,7 @@ export const SelectedOptionStats = ({ isActive, name, text, onClick }: Props) =>
             />
         </div>
         <div className="flex justify-between items-center">
-            <p className={`${isActive ? 'text-primary' : 'text-black'} text-base md:text-2xl font-semibold`}>{text}</p>
+            <p className={`${isActive ? 'text-primary' : 'text-black dark:text-white-dark'} text-base md:text-2xl font-semibold`}>{text}</p>
         </div>
     </button>
   )

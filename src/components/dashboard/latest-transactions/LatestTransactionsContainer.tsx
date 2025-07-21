@@ -9,7 +9,7 @@ interface Props {
 
 export const LatestTransactionsContainer = ({ transactions }: Props) => {
   return (
-    <section className="bg-white col-span-5 row-span-2 row-start-3 xl:row-span-4 xl:col-span-2 xl:col-start-4 rounded-lg p-2 overflow-y-scroll hidden xl:block">
+    <section className="bg-white dark:bg-mode-dark dark:text-white-dark col-span-5 row-span-2 row-start-3 xl:row-span-4 xl:col-span-2 xl:col-start-4 rounded-lg p-2 overflow-y-scroll hidden xl:block">
         <h3 className="font-bold font-poppins text-lg mb-2">Últimos movimientos</h3>
         <div className="flex justify-end">
           <ButtonOpenCreateTransactionModal/>

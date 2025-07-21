@@ -1,22 +1,14 @@
 import Image from "next/image"
+import { ButtonProfile } from "./ButtonProfile";
+import { cookies } from "next/headers";
 
-interface Props {
-  userName: string;
-}
+export const HeaderDashboard = async() => {
+  const cookieStore = await cookies();
 
-export const HeaderDashboard = ({ userName }: Props) => {
   return (
-    <header className="flex justify-between items-center p-4 bg-white shadow-md h-[10vh]">
+    <header className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-white dark:bg-mode-dark shadow-md h-[10vh]">
         <Image src="/images/logo.png" alt="Logo" width={100} height={100} />
-        <div className="flex flex-col items-center">
-            <Image
-                width={50}
-                height={50}
-                className="border rounded-full border-primary cursor-pointer"
-                src="/images/user_default.svg"
-                alt="Imagen del usuario"/>
-            <span className="text-xs text-center text-primary">{userName}</span>
-        </div>
+        <ButtonProfile userName={cookieStore.get('userName')?.value || ''}/>
     </header>
   )
 }
