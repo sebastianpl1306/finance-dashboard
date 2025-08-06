@@ -13,16 +13,16 @@ interface Props {
 
 export default async function DashboardLayout({ children }: Props) {
   const cookieStore = await cookies();
-  const user = await getCurrentUser();
+  const info = await getCurrentUser();
 
-  if (!cookieStore.get('token') || !user) {
+  if (!cookieStore.get('token') || !info || !info.user) {
     return redirect("/auth/login");
   }
 
   // TODO: Implement subscription check
-  // if(user.isSubscribed === false) {
-  //   return redirect("/config/payment");
-  // }
+  if(info.membership.status !== 'active') {
+    return redirect("/config/payment");
+  }
 
   return (
     <>

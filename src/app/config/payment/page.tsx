@@ -1,14 +1,8 @@
-'use client';
-// import { Button } from "@/components/UI";
-// import { starCheckoutPayment } from "@/actions/paymentActions";
+import { ButtonPaymentLink } from "@/components/config/ButtonPaymentLink";
+import { getBillingInfo } from "@/actions/paymentActions";
 
-export default function PaymentPage() {
-
-  // const handleStartCheckout = async () => {
-  //   const { url } = await starCheckoutPayment();
-  //   if (!url) return;
-  //   window.location.href = url
-  // }
+export default async function PaymentPage() {
+  const membershipInfo = await getBillingInfo();
 
   return (
     <main className="bg-white dark:bg-mode-dark dark:text-white-dark w-full md:w-5/6 m-auto h-[80vh] rounded-lg py-4 px-8 overflow-y-scroll mt-10">
@@ -21,7 +15,10 @@ export default function PaymentPage() {
                 <h2 className="text-center text-4xl font-bold mb-10">Plan Básico</h2>
                 <p className="text-center text-lg">Ideal para uso personal</p>
                 <p className="text-center text-xl font-bold">$20.000 COP/mes</p>
-                <a href="https://www.mercadopago.com.co/subscriptions/checkout?preapproval_plan_id=2c93808496df03450196edb8078106be">Suscribirme</a>
+                <div className="flex justify-center">
+                  <ButtonPaymentLink email={membershipInfo.email} userId={membershipInfo.userId} />
+                </div>
+                {/* <a href="https://www.mercadopago.com.co/subscriptions/checkout?preapproval_plan_id=2c93808496df03450196edb8078106be">Suscribirme</a> */}
                 {/* <Button className="mt-4 w-full" onClick={handleStartCheckout} text="Suscribirse"/> */}
               </div>
             </article>

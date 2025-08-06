@@ -2,6 +2,7 @@ import { getTransactionsDates, starGetTransactions } from "@/actions/transaction
 import { ButtonOpenCreateTransactionModal, MonthTransactionsFilters, NewTransactionModal, TransactionTable, UpdateTransactionModal } from "@/components/dashboard";
 import { Breadcrumb, Pagination } from "@/components/UI";
 import { BreadcrumbItem } from "@/interfaces";
+import { IoDocumentOutline } from "react-icons/io5";
 
 const itemsBreadCrumb: BreadcrumbItem[] = [
   { name: "Inicio", url: "/finance" },
@@ -29,8 +30,14 @@ export default async function TransactionPage({ searchParams }: Props) {
           <ButtonOpenCreateTransactionModal/>
         </div>
         <MonthTransactionsFilters dates={datesOfTransactions.dates ? datesOfTransactions.dates : []} activeMonth={Number(month)} activeYear={Number(year)}/>
-        <TransactionTable transactions={transactions?.transactions}/>
-        <Pagination currentPage={transactions.currentPage} totalPages={transactions.pages}/>
+        {transactions.transactions.length === 0 && (
+          <section className="h-full flex items-center justify-center flex-col text-center text-gray-500">
+            <IoDocumentOutline size={48} />
+            <p>No hay movimientos recientes.</p>
+          </section>
+        )}
+        { transactions.transactions.length > 0 && (<TransactionTable transactions={transactions?.transactions}/>)}
+        {transactions.transactions.length > 0 && (<Pagination currentPage={transactions.currentPage} totalPages={transactions.pages}/>)}
       </section>
       <NewTransactionModal/>
       <UpdateTransactionModal/>

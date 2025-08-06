@@ -2,6 +2,7 @@ import { Button } from "@/components/UI"
 import { LatestTransactionItem } from "./LatestTransactionItem"
 import { ButtonTypes, ButtonVariant, Transaction } from "@/interfaces"
 import { ButtonOpenCreateTransactionModal, NewTransactionModal } from "../transactions";
+import { IoDocumentOutline } from "react-icons/io5";
 
 interface Props {
   transactions: Transaction[];
@@ -14,19 +15,29 @@ export const LatestTransactionsContainer = ({ transactions }: Props) => {
         <div className="flex justify-end">
           <ButtonOpenCreateTransactionModal/>
         </div>
-        <section className="mt-2 px-2">
-          {
-            transactions.map((transaction) => (
-              <div key={transaction._id}>
-                <LatestTransactionItem transaction={transaction}/>
-                <hr className="border-gray"/>
-              </div>
-            ))
-          }
-        </section>
-        <section className="my-4">
-            <Button text="Ver mas" url="/finance/transactions" typeButton={ButtonTypes.LINK} variant={ButtonVariant.LINK}/>
-        </section>
+        {transactions.length === 0 && (
+          <section className="h-full flex items-center justify-center flex-col text-center text-gray-500">
+            <IoDocumentOutline size={48} />
+            <p>No hay movimientos recientes.</p>
+          </section>
+        )}
+        {transactions.length > 0 && (
+          <section>
+            <section className="mt-2 px-2">
+              {
+                transactions.map((transaction) => (
+                  <div key={transaction._id}>
+                    <LatestTransactionItem transaction={transaction}/>
+                    <hr className="border-gray"/>
+                  </div>
+                ))
+              }
+            </section>
+            <section className="my-4">
+              <Button text="Ver mas" url="/finance/transactions" typeButton={ButtonTypes.LINK} variant={ButtonVariant.LINK}/>
+            </section>
+          </section>
+        )}
         <NewTransactionModal/>
     </section>
   )

@@ -70,13 +70,15 @@ export default function HomePage() {
           </Card>
         </article>
       </section>
-      <section className="flex justify-around py-14 w-full md:w-5/6 m-auto bg-secondary p-10 mt-10">
-        <Image src="/images/auth-background.webp" alt="finances" width={600} height={600} className="shadow-lg"/>
-        <article className="p-4">
-          <h3 className="text-5xl font-poppins text-white dark:text-white-dark font-bold mb-4">Empieza a organizar tus finanzas hoy mismo</h3>
-          <h4 className="text-xl font-poppins text-white dark:text-white-dark font-bold mb-4">Tu futuro financiero empieza con un solo registro. ¡Hazlo fácil!</h4>
-          <Button text="Empieza ahora" typeButton={ButtonTypes.LINK} url="/auth/register" className="w-60 my-4"/>
-        </article>
+      <section className="flex justify-around py-14 w-full m-auto bg-secondary mt-10">
+        <div className="flex justify-around w-full md:w-5/6 m-auto">
+          <Image src="/images/auth-background.webp" alt="finances" width={600} height={600} className="shadow-lg"/>
+          <article className="p-4">
+            <h3 className="text-5xl font-poppins text-white dark:text-white-dark font-bold mb-4">Empieza a organizar tus finanzas hoy mismo</h3>
+            <h4 className="text-xl font-poppins text-white dark:text-white-dark font-bold mb-4">Tu futuro financiero empieza con un solo registro. ¡Hazlo fácil!</h4>
+            <Button text="Empieza ahora" typeButton={ButtonTypes.LINK} url="/auth/register" className="w-60 my-4"/>
+          </article>
+        </div>
       </section>
       <section className="py-14 w-full md:w-5/6 m-auto">
         <h3 className="font-poppins text-4xl text-center py-4 text-black dark:text-white-dark">Preguntas frecuentes (FAQ)</h3>

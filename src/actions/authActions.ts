@@ -106,7 +106,7 @@ export const getCurrentUser = async() =>{
   if (!cookieToken) return null;
 
   try {
-    const { ok, user }: ResponseGetCurrentUser = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/userInfo`, {
+    const { ok, user, membership }: ResponseGetCurrentUser = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/userInfo`, {
       headers: {
         'x-token': `${cookieToken?.value.replaceAll('"', '')}`
       },
@@ -117,7 +117,7 @@ export const getCurrentUser = async() =>{
       return null;
     }
 
-    return user;
+    return {user, membership};
   } catch (error) {
     console.error('Error al obtener el usuario:', error);
     return null;

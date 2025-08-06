@@ -45,7 +45,7 @@ export const NewCategoryModal = () => {
             </span>
             {errorMessage && (<span className="text-red-500">{errorMessage}</span>)}
             <span className="w-full flex justify-end">
-                <Button text="Crear transacción" typeButton={ButtonTypes.SUBMIT} formAction={createCategoryModal}/>
+                <Button text="Crear categoría" typeButton={ButtonTypes.SUBMIT} formAction={createCategoryModal}/>
             </span>
         </form>
     </Modal>
